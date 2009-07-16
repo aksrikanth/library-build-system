@@ -1,10 +1,28 @@
-TXTFILES=FileList['./txt/*.txt']
-HTMLFILES=TXTFILES.gsub(/^.\/txt/, './html').gsub(/txt$/, 'html')
-PDFFILES=TXTFILES.gsub(/^.\/txt/, './pdf').gsub(/txt$/, 'pdf')
-PLUCKERFILES=TXTFILES.gsub(/^.\/txt/, './plucker').gsub(/txt$/, 'pdb')
+require 'rake/clean'
+
+TXTFILES = FileList['txt/*.txt']
+HTMLFILES = TXTFILES.gsub(/^txt/, 'html').gsub(/txt$/, 'html')
+PDFFILES = TXTFILES.gsub(/^txt/, 'pdf').gsub(/txt$/, 'pdf')
+PLUCKERFILES = TXTFILES.gsub(/^txt/, 'plucker').gsub(/txt$/, 'pdb')
+MOBIFILES = TXTFILES.gsub(/^txt/, 'mobi').gsub(/txt$/, 'mobi')
+EPUBFILES = TXTFILES.gsub(/^txt/, 'epub').gsub(/txt$/, 'epub')
+
+CLOBBER.include(HTMLFILES)
+CLOBBER.exclude('html/0-Readme.html')
+CLOBBER.include(PDFFILES)
+CLOBBER.exclude('pdf/0-Readme.pdf')
+CLOBBER.include(PLUCKERFILES)
+CLOBBER.exclude('plucker/0-Readme.pdb')
+CLOBBER.include(MOBIFILES)
+CLOBBER.exclude('mobi/0-Readme.mobi')
+CLOBBER.include(EPUBFILES)
+CLOBBER.exclude('epub/0-Readme.epub')
+
+desc "Create html files only by default"
+task :default => :html
 
 desc "Create all formats from text"
-task :default => [:pdf, :html, :plucker]
+task :all => [:html, :pdf, :plucker, :mobi, :epub]
 
 desc "Create html ebooks from text"
 task :html => HTMLFILES do
@@ -18,31 +36,57 @@ desc "Create plucker ebooks from html"
 task :plucker => PLUCKERFILES do
 end
 
+desc "Create plucker ebooks from html"
+task :mobi => MOBIFILES do
+end
+
+desc "Create plucker ebooks from html"
+task :epub => EPUBFILES do
+end
+
+def command(string, execute = true)
+  puts string
+  sh string if execute
+end
+
 rule('.html' => [
                 proc do |name|
-                  name.gsub(/^.\/html/, './txt').gsub(/html$/, 'txt')
+                  name.gsub(/^html/, 'txt').gsub(/html$/, 'txt')
                 end
                 ]) do |t|
-  puts "txt2html -tf --xhtml --noanchors --nomake_links \"#{t.source}\" | ruby scripts/toc.rb > \"#{t.name}\""
-  sh "txt2html -tf --xhtml --noanchors --nomake_links \"#{t.source}\" | ruby scripts/toc.rb > \"#{t.name}\""
+  command "txt2html -tf --xhtml --noanchors --nomake_links \"#{t.source}\" | ruby scripts/toc.rb > \"#{t.name}\""
 end
 
 rule('.pdf' =>  [
                 proc do |name|
-                  name.gsub(/^.\/pdf/, './html').gsub(/pdf$/, 'html')
+                  name.gsub(/^pdf/, 'html').gsub(/pdf$/, 'html')
                 end
                 ]) do |t|
-  puts "html2ps \"#{t.source}\" | ps2pdf - > \"#{t.name}\""
-  sh "html2ps \"#{t.source}\" | ps2pdf - > \"#{t.name}\""
+  command "html2ps \"#{t.source}\" | ps2pdf - > \"#{t.name}\""
 end
 
 rule('.pdb' =>  [
                 proc do |name|
-                  name.gsub(/^.\/plucker/, './html').gsub(/pdb$/, 'html')
+                  name.gsub(/^plucker/, 'html').gsub(/pdb$/, 'html')
                 end
                 ]) do |t|
 
-  name = t.source.gsub(/^.\/html\//, '').gsub(/\.html$/, '')
-  puts "plucker-build -P ./plucker -f \"#{name}\" \"#{t.source}\""
-  sh "plucker-build -P ./plucker -f \"#{name}\" \"#{t.source}\""
+  name = t.source.gsub(/^html\//, '').gsub(/\.html$/, '')
+  command "plucker-build -P ./plucker -f \"#{name}\" \"#{t.source}\""
+end
+
+rule('.mobi' =>  [
+                proc do |name|
+                  name.gsub(/^mobi/, 'html').gsub(/mobi$/, 'html')
+                end
+                ]) do |t|
+  command "any2mobi --max-toc-links 0 --level1-toc '//h2' --level2-toc '//h3' -o \"#{t.name}\" \"#{t.source}\""
+end
+
+rule('.epub' =>  [
+                proc do |name|
+                  name.gsub(/^epub/, 'html').gsub(/epub$/, 'html')
+                end
+                ]) do |t|
+  command "any2epub --max-toc-links 0 --level1-toc '//h2' --level2-toc '//h3' -o \"#{t.name}\" \"#{t.source}\""
 end

@@ -1,4 +1,9 @@
+incoming
+scripts/*.txt
+scripts/*.html
 txt/[^0-9]*.txt
 html/[^0-9]*.html
 pdf/[^0-9]*.pdf
 plucker/[^0-9]*.pdb
+mobi/[^0-9]*.mobi
+epub/[^0-9]*.epub

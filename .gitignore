@@ -1,0 +1,4 @@
+txt/[^0-9]*.txt
+html/[^0-9]*.html
+pdf/[^0-9]*.pdf
+plucker/[^0-9]*.pdb

@@ -1,0 +1,48 @@
+TXTFILES=FileList['./txt/*.txt']
+HTMLFILES=TXTFILES.gsub(/^.\/txt/, './html').gsub(/txt$/, 'html')
+PDFFILES=TXTFILES.gsub(/^.\/txt/, './pdf').gsub(/txt$/, 'pdf')
+PLUCKERFILES=TXTFILES.gsub(/^.\/txt/, './plucker').gsub(/txt$/, 'pdb')
+
+desc "Create all formats from text"
+task :default => [:pdf, :html, :plucker]
+
+desc "Create html ebooks from text"
+task :html => HTMLFILES do
+end
+
+desc "Create pdf ebooks from html"
+task :pdf => PDFFILES do
+end
+
+desc "Create plucker ebooks from html"
+task :plucker => PLUCKERFILES do
+end
+
+rule('.html' => [
+                proc do |name|
+                  name.gsub(/^.\/html/, './txt').gsub(/html$/, 'txt')
+                end
+                ]) do |t|
+  puts "txt2html -tf --xhtml --noanchors --nomake_links \"#{t.source}\" | ruby scripts/toc.rb > \"#{t.name}\""
+  sh "txt2html -tf --xhtml --noanchors --nomake_links \"#{t.source}\" | ruby scripts/toc.rb > \"#{t.name}\""
+end
+
+rule('.pdf' =>  [
+                proc do |name|
+                  name.gsub(/^.\/pdf/, './html').gsub(/pdf$/, 'html')
+                end
+                ]) do |t|
+  puts "html2ps \"#{t.source}\" | ps2pdf - > \"#{t.name}\""
+  sh "html2ps \"#{t.source}\" | ps2pdf - > \"#{t.name}\""
+end
+
+rule('.pdb' =>  [
+                proc do |name|
+                  name.gsub(/^.\/plucker/, './html').gsub(/pdb$/, 'html')
+                end
+                ]) do |t|
+
+  name = t.source.gsub(/^.\/html\//, '').gsub(/\.html$/, '')
+  puts "plucker-build -P ./plucker -f \"#{name}\" \"#{t.source}\""
+  sh "plucker-build -P ./plucker -f \"#{name}\" \"#{t.source}\""
+end

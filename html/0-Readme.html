@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>E-Book Library Build System</title>
+<meta name="generator" content="HTML::TextToHTML v2.51" />
+</head>
+<body><div id="toc-toc">
+  <h2>Table of Contents</h2>
+  <ul>
+    <li>
+      <a href="#section_1">PART I
+</a>
+      <ul>
+        <li>
+          <a href="#section_1_1">Introduction
+</a>
+        </li>
+        <li>
+          <a href="#section_1_2">Requirements
+</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#section_2">PART II
+</a>
+      <ul>
+        <li>
+          <a href="#section_2_1">Usage
+</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<h1>E-Book Library Build System</h1>
+
+<h2><a name="section_1">PART I</a>
+</h2>
+
+<h3><a name="section_1_1">Introduction</a>
+</h3>
+
+<p>This system is designed to store e-books in <strong>plain text format</strong> and to
+generate readable html, pdf and other formats from it automatically. In
+order to accomplish this, the text files need to be formatted appropriately.
+The aim of this system is to ensure that the text is readable by itself and
+that other formats build on the text document and add appropriate features.
+</p>
+<p>Since the books are stored in plain text, this is suitable only for <u>ASCII
+prose</u>. There is no provision for anything more than the most <em>simple</em>
+formatting. It is possible, therefore that some books might require
+preprocessing and might lose some formatting. Accented characters are not
+supported at this time.
+</p>
+<h3><a name="section_1_2">Requirements</a>
+</h3>
+
+<p>The following programs and libraries must be installed for proper
+functioning of this system:
+</p>
+<ol>
+  <li>txt2html
+  </li><li>ruby
+  </li><li>rubygems
+  </li><li>hpricot gem
+  </li><li>builder gem
+  </li><li>rake gem
+  </li><li>html2ps
+  </li><li>ps2pdf (may be packaged with the ghostscript package)
+  </li><li>plucker
+</li></ol>
+<p>On Ubuntu these may be installed by running
+</p>
+<pre>
+      # Run this on the command line
+      $ sudo apt-get install txt2html ruby html2ps ghostscript plucker
+</pre>
+<p>I recommend installing the latest version of rubygems from it's source by
+following the instructions here : http://rubygems.org/read/chapter/3
+</p>
+<p>Then the gems can be installed by running
+</p>
+<pre>
+      # Run this on the command line
+      $ sudo gem install hpricot builder rake
+</pre>
+<h2><a name="section_2">PART II</a>
+</h2>
+
+<h3><a name="section_2_1">Usage</a>
+</h3>
+
+
+</body>
+</html>

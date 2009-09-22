@@ -1,5 +1,6 @@
 incoming
 scripts/*.txt
+scripts/*.pdf
 scripts/*.html
 txt/[^0-9]*.txt
 html/[^0-9]*.html

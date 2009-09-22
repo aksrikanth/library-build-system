@@ -1,4 +1,5 @@
 require 'rake/clean'
+require 'yaml'
 
 TXTFILES = FileList['txt/*.txt']
 HTMLFILES = TXTFILES.gsub(/^txt/, 'html').gsub(/txt$/, 'html')
@@ -49,6 +50,10 @@ def command(string, execute = true)
   sh string if execute
 end
 
+def metadata(filename)
+  metadata = YAML.load(`tail -n 1 "#{filename}"`)
+end
+
 rule('.html' => [
                 proc do |name|
                   name.gsub(/^html/, 'txt').gsub(/html$/, 'txt')
@@ -80,7 +85,8 @@ rule('.mobi' =>  [
                   name.gsub(/^mobi/, 'html').gsub(/mobi$/, 'html')
                 end
                 ]) do |t|
-  command "any2mobi --max-toc-links 0 --level1-toc '//h2' --level2-toc '//h3' -o \"#{t.name}\" \"#{t.source}\""
+  meta = metadata(t.source.gsub(/^html/, 'txt').gsub(/html$/, 'txt'))
+  command "ebook-convert \"#{t.source}\" \"#{t.name}\" --chapter '/' --max-toc-links 0 --level1-toc '//h2' --level2-toc '//h3' --title \"#{meta[:title]}\" --authors \"#{meta[:authors]}\""
 end
 
 rule('.epub' =>  [
@@ -88,5 +94,6 @@ rule('.epub' =>  [
                   name.gsub(/^epub/, 'html').gsub(/epub$/, 'html')
                 end
                 ]) do |t|
-  command "any2epub --max-toc-links 0 --level1-toc '//h2' --level2-toc '//h3' -o \"#{t.name}\" \"#{t.source}\""
+  meta = metadata(t.source.gsub(/^html/, 'txt').gsub(/html$/, 'txt'))
+  command "ebook-convert \"#{t.source}\" \"#{t.name}\" --chapter '/' --max-toc-links 0 --level1-toc '//h2' --level2-toc '//h3' --title \"#{meta[:title]}\" --authors \"#{meta[:authors]}\""
 end

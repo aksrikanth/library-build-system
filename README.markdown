@@ -4,7 +4,7 @@
 
 ### Introduction
 
-This system is designed to store e-books in #plain text format# and to
+This system is designed to store e-books in **plain text format** and to
 generate readable html, pdf and other formats from it automatically. In
 order to accomplish this, the text files need to be formatted appropriately.
 The aim of this system is to ensure that the text is readable by itself and

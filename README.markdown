@@ -48,4 +48,12 @@ Then the gems can be installed by running
 
 ### Usage
 
-{ :authors: "Srikanth K Agaram", :title: "E-Book Library Build System" }
+Use the following `rake` command to see what formats can be built.
+
+    # Run this on the command line
+    $ rake -T
+
+For example to build kindle compatible '.mobi' files do
+
+    # Run this on the command line
+    $ rake mobi

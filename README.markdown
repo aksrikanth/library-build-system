@@ -33,16 +33,16 @@ functioning of this system:
 
 On Ubuntu these may be installed by running
 
-        # Run this on the command line
-        $ sudo apt-get install txt2html ruby html2ps ghostscript plucker
+    # Run this on the command line
+    $ sudo apt-get install txt2html ruby html2ps ghostscript plucker
 
 I recommend installing the latest version of rubygems from it's source by
 following the instructions here : http://rubygems.org/read/chapter/3
 
 Then the gems can be installed by running
 
-        # Run this on the command line
-        $ sudo gem install hpricot builder rake
+    # Run this on the command line
+    $ sudo gem install hpricot builder rake
 
 ## PART II
 

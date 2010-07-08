@@ -46,6 +46,13 @@ Then the gems can be installed by running
 
 ## PART II
 
+### Books
+
+All books to be built must be in plain text format and placed in the `txt/`
+folder. The books may be formatted according to the syntax used by txt2html.
+See [their help page](http://txt2html.sourceforge.net/) to see how to format
+your books. You can also follow the example `0-Readme.txt` in the `txt` folder.
+
 ### Usage
 
 Use the following `rake` command to see what formats can be built.

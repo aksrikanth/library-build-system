@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import sys
 import getopt
 from BeautifulSoup import BeautifulSoup, Tag, NavigableString
@@ -73,7 +74,7 @@ class Toc:
       for count in counts:
         if count == 0:
           break
-        name = '%s_%i' % (name, count)
+        name = '%(name)s_%(count)i' % { 'name': name, 'count': count }
 
       tag['id'] = name
       self.toc_list.append({ 'depth': depth, 'id': name, 'title': tag.text })
@@ -110,7 +111,7 @@ class Toc:
       a = Tag(self.soup, 'a')
       title = NavigableString(toc_item['title'])
       a.append(title)
-      a['href'] = '#%s' % (toc_item['id'])
+      a['href'] = '#%(id)s' % { 'id': toc_item['id'] }
       li.append(a)
       lists[depth].append(li)
       last_li = li
@@ -122,10 +123,10 @@ class Toc:
     prefix = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<title>%s</title>
+	<title>%(title)s</title>
 </head>
 <body>
-    """ % (self.title)
+    """ % { 'title': self.title }
     suffix = """
     </body>
     </html>
@@ -144,19 +145,18 @@ def parse_opts(args):
   return ' '.join(args), opts
 
 def usage():
-  name = sys.argv[0]
-  print ''
-  print 'usage: ',name,' [options]'
+  print
+  print 'usage: %(name)s [options]' % { 'name': sys.argv[0] }
   print 'options:'
-  print '  -h, --help ::'
-  print '    show this help message'
-  print '  -t, --tags ::'
-  print '    comma separated list of tags to put in the table of contents'
-  print '    e.g. h2,h3'
-  print '  -i, --infile ::'
-  print '    (X)HTML file input to generate TOC for (default is stdin).'
-  print '  -o, --outfile ::'
-  print '    file to send output to (default is stdout)'
+  print '\t-h, --help ::'
+  print '\t\tshow this help message'
+  print '\t-t, --tags ::'
+  print '\t\tcomma separated list of tags to put in the table of contents'
+  print '\t\te.g. h2,h3'
+  print '\t-i, --infile ::'
+  print '\t\t(X)HTML file input to generate TOC for (default is stdin).'
+  print '\t-o, --outfile ::'
+  print '\t\tfile to send output to (default is stdout)'
 
 if __name__ == '__main__':
   title, options = parse_opts(sys.argv[1:])

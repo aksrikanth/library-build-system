@@ -62,3 +62,5 @@ For example to build kindle compatible '.mobi' files do
 
     # Run this on the command line
     $ rake mobi
+
+{ :authors: "Srikanth Agaram", :title: "E-Book Library Build System" }

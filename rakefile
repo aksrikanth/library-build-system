@@ -59,7 +59,8 @@ rule('.html' => [
                   name.gsub(/^html/, 'txt').gsub(/html$/, 'txt')
                 end
                 ]) do |t|
-  command "txt2html -tf --xhtml --noanchors --nomake_links \"#{t.source}\" | ruby scripts/toc.rb > \"#{t.name}\""
+  meta = metadata(t.source)
+  command "python scripts/markdown2.py \"#{t.source}\" | python scripts/toc.py \"#{meta[:title]}\" > \"#{t.name}\""
 end
 
 rule('.pdf' =>  [

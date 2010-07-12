@@ -2,6 +2,7 @@ incoming
 scripts/*.txt
 scripts/*.pdf
 scripts/*.html
+scripts/*.pyc
 txt/[^0-9]*.txt
 html/[^0-9]*.html
 pdf/[^0-9]*.pdf

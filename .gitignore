@@ -3,7 +3,7 @@ scripts/*.txt
 scripts/*.pdf
 scripts/*.html
 scripts/*.pyc
-txt/[^0-9]*.txt
+mkd/[^0-9]*.mkd
 html/[^0-9]*.html
 pdf/[^0-9]*.pdf
 plucker/[^0-9]*.pdb

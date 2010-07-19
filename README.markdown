@@ -1,8 +1,8 @@
-# E-Book Library Build System
+# E-Book Library Build System #
 
-## PART I
+## PART I ##
 
-### Introduction
+### Introduction ###
 
 This system is designed to store e-books in **plain text format** and to
 generate readable html, pdf and other formats from it automatically. In
@@ -15,7 +15,7 @@ prose_. There is no provision for anything more than the most *simple*
 formatting. It is possible, therefore that some books might require
 preprocessing and might lose some formatting.
 
-### Requirements
+### Requirements ###
 
 The following programs and libraries must be installed for proper
 functioning of this system:
@@ -42,16 +42,16 @@ Then the gems can be installed by running
     # Run this on the command line
     $ sudo gem install rake
 
-## PART II
+## PART II ##
 
-### Books
+### Books ###
 
-All books to be built must be in plain text format and placed in the `txt/`
+All books to be built must be in plain text format and placed in the `mkd/`
 folder. The books may be formatted in [markdown](http://daringfireball.net/projects/markdown/).
 See [their syntax page](http://daringfireball.net/projects/markdown/syntax) to see how to format
-your books. You can also follow the example `0-Readme.txt` in the `txt` folder.
+your books. You can also follow the example `0-Readme.mkd` in the `mkd` folder.
 
-### Usage
+### Usage ###
 
 Use the following `rake` command to see what formats can be built.
 

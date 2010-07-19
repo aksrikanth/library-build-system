@@ -1,12 +1,12 @@
 require 'rake/clean'
 require 'yaml'
 
-TXTFILES = FileList['txt/*.txt']
-HTMLFILES = TXTFILES.gsub(/^txt/, 'html').gsub(/txt$/, 'html')
-PDFFILES = TXTFILES.gsub(/^txt/, 'pdf').gsub(/txt$/, 'pdf')
-PLUCKERFILES = TXTFILES.gsub(/^txt/, 'plucker').gsub(/txt$/, 'pdb')
-MOBIFILES = TXTFILES.gsub(/^txt/, 'mobi').gsub(/txt$/, 'mobi')
-EPUBFILES = TXTFILES.gsub(/^txt/, 'epub').gsub(/txt$/, 'epub')
+TXTFILES = FileList['mkd/*.mkd']
+HTMLFILES = TXTFILES.gsub(/^mkd/, 'html').gsub(/mkd$/, 'html')
+PDFFILES = TXTFILES.gsub(/^mkd/, 'pdf').gsub(/mkd$/, 'pdf')
+PLUCKERFILES = TXTFILES.gsub(/^mkd/, 'plucker').gsub(/mkd$/, 'pdb')
+MOBIFILES = TXTFILES.gsub(/^mkd/, 'mobi').gsub(/mkd$/, 'mobi')
+EPUBFILES = TXTFILES.gsub(/^mkd/, 'epub').gsub(/mkd$/, 'epub')
 
 CLOBBER.include(HTMLFILES)
 CLOBBER.exclude('html/0-Readme.html')
@@ -56,11 +56,11 @@ end
 
 rule('.html' => [
                 proc do |name|
-                  name.gsub(/^html/, 'txt').gsub(/html$/, 'txt')
+                  name.gsub(/^html/, 'mkd').gsub(/html$/, 'mkd')
                 end
                 ]) do |t|
   meta = metadata(t.source)
-  command "python scripts/markdown2.py \"#{t.source}\" | python scripts/toc.py \"#{meta[:title]}\" > \"#{t.name}\""
+  command "sed '$d' \"#{t.source}\" | python scripts/markdown2.py | python scripts/toc.py \"#{meta[:title]}\" > \"#{t.name}\""
 end
 
 rule('.pdf' =>  [
@@ -86,7 +86,7 @@ rule('.mobi' =>  [
                   name.gsub(/^mobi/, 'html').gsub(/mobi$/, 'html')
                 end
                 ]) do |t|
-  meta = metadata(t.source.gsub(/^html/, 'txt').gsub(/html$/, 'txt'))
+  meta = metadata(t.source.gsub(/^html/, 'mkd').gsub(/html$/, 'mkd'))
   command "ebook-convert \"#{t.source}\" \"#{t.name}\" --chapter '/' --max-toc-links 0 --level1-toc '//h2' --level2-toc '//h3' --title \"#{meta[:title]}\" --authors \"#{meta[:authors]}\""
 end
 
@@ -95,6 +95,6 @@ rule('.epub' =>  [
                   name.gsub(/^epub/, 'html').gsub(/epub$/, 'html')
                 end
                 ]) do |t|
-  meta = metadata(t.source.gsub(/^html/, 'txt').gsub(/html$/, 'txt'))
+  meta = metadata(t.source.gsub(/^html/, 'mkd').gsub(/html$/, 'mkd'))
   command "ebook-convert \"#{t.source}\" \"#{t.name}\" --chapter '/' --max-toc-links 0 --level1-toc '//h2' --level2-toc '//h3' --title \"#{meta[:title]}\" --authors \"#{meta[:authors]}\""
 end

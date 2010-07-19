@@ -1,98 +1,199 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<title>E-Book Library Build System</title>
-<meta name="generator" content="HTML::TextToHTML v2.51" />
+	<title>E-Book Library Build System</title>
 </head>
-<body><div id="toc-toc">
-  <h2>Table of Contents</h2>
-  <ul>
+<body>
+    <div id="auto_toc">
+ <h2>
+  Contents
+ </h2>
+ <ol>
+  <li>
+   <a href="#section_1">
+    PART I
+   </a>
+   <ol>
     <li>
-      <a href="#section_1">PART I
-</a>
-      <ul>
-        <li>
-          <a href="#section_1_1">Introduction
-</a>
-        </li>
-        <li>
-          <a href="#section_1_2">Requirements
-</a>
-        </li>
-      </ul>
+     <a href="#section_1_1">
+      Introduction
+     </a>
     </li>
     <li>
-      <a href="#section_2">PART II
-</a>
-      <ul>
-        <li>
-          <a href="#section_2_1">Usage
-</a>
-        </li>
-      </ul>
+     <a href="#section_1_2">
+      Requirements
+     </a>
     </li>
-  </ul>
+   </ol>
+  </li>
+  <li>
+   <a href="#section_2">
+    PART II
+   </a>
+   <ol>
+    <li>
+     <a href="#section_2_1">
+      Books
+     </a>
+    </li>
+    <li>
+     <a href="#section_2_2">
+      Usage
+     </a>
+    </li>
+   </ol>
+  </li>
+ </ol>
 </div>
-
-<h1>E-Book Library Build System</h1>
-
-<h2><a name="section_1">PART I</a>
+<h1>
+ E-Book Library Build System
+</h1>
+<h2 id="section_1">
+ PART I
 </h2>
-
-<h3><a name="section_1_1">Introduction</a>
+<h3 id="section_1_1">
+ Introduction
 </h3>
-
-<p>This system is designed to store e-books in <strong>plain text format</strong> and to
+<p>
+ This system is designed to store e-books in
+ <strong>
+  plain text format
+ </strong>
+ and to
 generate readable html, pdf and other formats from it automatically. In
 order to accomplish this, the text files need to be formatted appropriately.
 The aim of this system is to ensure that the text is readable by itself and
 that other formats build on the text document and add appropriate features.
 </p>
-<p>Since the books are stored in plain text, this is suitable only for <u>ASCII
-prose</u>. There is no provision for anything more than the most <em>simple</em>
-formatting. It is possible, therefore that some books might require
-preprocessing and might lose some formatting. Accented characters are not
-supported at this time.
+<p>
+ Since the books are stored in plain text, this is suitable only for
+ <em>
+  ASCII
+prose
+ </em>
+ . There is no provision for anything more than the most
+ <em>
+  simple
+ </em>
+ formatting. It is possible, therefore that some books might require
+preprocessing and might lose some formatting.
 </p>
-<h3><a name="section_1_2">Requirements</a>
+<h3 id="section_1_2">
+ Requirements
 </h3>
-
-<p>The following programs and libraries must be installed for proper
+<p>
+ The following programs and libraries must be installed for proper
 functioning of this system:
 </p>
 <ol>
-  <li>txt2html
-  </li><li>ruby
-  </li><li>rubygems
-  </li><li>hpricot gem
-  </li><li>builder gem
-  </li><li>rake gem
-  </li><li>html2ps
-  </li><li>ps2pdf (may be packaged with the ghostscript package)
-  </li><li>plucker
-</li></ol>
-<p>On Ubuntu these may be installed by running
+ <li>
+  python
+ </li>
+ <li>
+  ruby
+ </li>
+ <li>
+  rubygems
+ </li>
+ <li>
+  rake gem
+ </li>
+ <li>
+  html2ps (needed for pdf)
+ </li>
+ <li>
+  ps2pdf (needed for pdf. may be packaged with the ghostscript package)
+ </li>
+ <li>
+  plucker (needed for plucker)
+ </li>
+ <li>
+  calibre (needed for mobibook and ePub)
+ </li>
+</ol>
+<p>
+ On Ubuntu these may be installed by running
 </p>
 <pre>
-      # Run this on the command line
-      $ sudo apt-get install txt2html ruby html2ps ghostscript plucker
+ <code>
+  # Run this on the command line
+$ sudo apt-get install python ruby html2ps ghostscript plucker calibre
+ </code>
 </pre>
-<p>I recommend installing the latest version of rubygems from it's source by
-following the instructions here : http://rubygems.org/read/chapter/3
+<p>
+ I recommend installing the latest version of rubygems from it's source by
+following the instructions
+ <a href="http://rubygems.org/read/chapter/3">
+  here
+ </a>
+ .
 </p>
-<p>Then the gems can be installed by running
+<p>
+ Then the gems can be installed by running
 </p>
 <pre>
-      # Run this on the command line
-      $ sudo gem install hpricot builder rake
+ <code>
+  # Run this on the command line
+$ sudo gem install rake
+ </code>
 </pre>
-<h2><a name="section_2">PART II</a>
+<h2 id="section_2">
+ PART II
 </h2>
-
-<h3><a name="section_2_1">Usage</a>
+<h3 id="section_2_1">
+ Books
 </h3>
+<p>
+ All books to be built must be in plain text format and placed in the
+ <code>
+  mkd/
+ </code>
+ folder. The books may be formatted in
+ <a href="http://daringfireball.net/projects/markdown/">
+  markdown
+ </a>
+ .
+See
+ <a href="http://daringfireball.net/projects/markdown/syntax">
+  their syntax page
+ </a>
+ to see how to format
+your books. You can also follow the example
+ <code>
+  0-Readme.mkd
+ </code>
+ in the
+ <code>
+  mkd
+ </code>
+ folder.
+</p>
+<h3 id="section_2_2">
+ Usage
+</h3>
+<p>
+ Use the following
+ <code>
+  rake
+ </code>
+ command to see what formats can be built.
+</p>
+<pre>
+ <code>
+  # Run this on the command line
+$ rake -T
+ </code>
+</pre>
+<p>
+ For example to build kindle compatible '.mobi' files do
+</p>
+<pre>
+ <code>
+  # Run this on the command line
+$ rake mobi
+ </code>
+</pre>
 
-<p>{ :authors: "Srikanth K Agaram", :title: "E-Book Library Build System" }</p>
-
-</body>
-</html>
+    </body>
+    </html>
+    

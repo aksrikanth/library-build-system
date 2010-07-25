@@ -9,3 +9,6 @@ pdf/[^0-9]*.pdf
 plucker/[^0-9]*.pdb
 mobi/[^0-9]*.mobi
 epub/[^0-9]*.epub
+lit/[^0-9]*.lit
+pdb/[^0-9]*.pdb
+fb2/[^0-9]*.fb2

@@ -4,6 +4,7 @@ scripts/*.pdf
 scripts/*.html
 scripts/*.pyc
 mkd/[^0-9]*.mkd
+covers/[^0-9]*.jpg
 html/[^0-9]*.html
 pdf/[^0-9]*.pdf
 plucker/[^0-9]*.pdb

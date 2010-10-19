@@ -108,7 +108,7 @@ rule('.mobi' =>  [
                 end
                 ]) do |t|
   meta = metadata(t.source.gsub(/^html/, 'mkd').gsub(/html$/, 'mkd'))
-  command "ebook-convert \"#{t.source}\" \"#{t.name}\" --chapter '/' --max-toc-links 0 --level1-toc '//h2' --level2-toc '//h3' --title \"#{meta[:title]}\" --authors \"#{meta[:authors]}\""
+  command "ebook-convert \"#{t.source}\" \"#{t.name}\" --chapter '/' --max-toc-links 0 --level1-toc '//h2' --level2-toc '//h3' --title \"#{meta[:title]}\" --authors \"#{meta[:authors]}\" --cover \"#{t.source.gsub(/^html/, 'covers').gsub(/html$/, 'jpg')}\""
 end
 
 rule('.epub' =>  [
@@ -117,7 +117,7 @@ rule('.epub' =>  [
                 end
                 ]) do |t|
   meta = metadata(t.source.gsub(/^html/, 'mkd').gsub(/html$/, 'mkd'))
-  command "ebook-convert \"#{t.source}\" \"#{t.name}\" --chapter '/' --max-toc-links 0 --level1-toc '//h2' --level2-toc '//h3' --title \"#{meta[:title]}\" --authors \"#{meta[:authors]}\""
+  command "ebook-convert \"#{t.source}\" \"#{t.name}\" --chapter '/' --max-toc-links 0 --level1-toc '//h2' --level2-toc '//h3' --title \"#{meta[:title]}\" --authors \"#{meta[:authors]}\" --cover \"#{t.source.gsub(/^html/, 'covers').gsub(/html$/, 'jpg')}\""
 end
 
 rule('.lit' =>  [
@@ -126,7 +126,7 @@ rule('.lit' =>  [
                 end
                 ]) do |t|
   meta = metadata(t.source.gsub(/^html/, 'mkd').gsub(/html$/, 'mkd'))
-  command "ebook-convert \"#{t.source}\" \"#{t.name}\" --chapter '/' --max-toc-links 0 --level1-toc '//h2' --level2-toc '//h3' --title \"#{meta[:title]}\" --authors \"#{meta[:authors]}\""
+  command "ebook-convert \"#{t.source}\" \"#{t.name}\" --chapter '/' --max-toc-links 0 --level1-toc '//h2' --level2-toc '//h3' --title \"#{meta[:title]}\" --authors \"#{meta[:authors]}\" --cover \"#{t.source.gsub(/^html/, 'covers').gsub(/html$/, 'jpg')}\""
 end
 
 rule('.pdb' =>  [
@@ -135,7 +135,7 @@ rule('.pdb' =>  [
                 end
                 ]) do |t|
   meta = metadata(t.source.gsub(/^html/, 'mkd').gsub(/html$/, 'mkd'))
-  command "ebook-convert \"#{t.source}\" \"#{t.name}\" --chapter '/' --max-toc-links 0 --level1-toc '//h2' --level2-toc '//h3' --title \"#{meta[:title]}\" --authors \"#{meta[:authors]}\""
+  command "ebook-convert \"#{t.source}\" \"#{t.name}\" --chapter '/' --max-toc-links 0 --level1-toc '//h2' --level2-toc '//h3' --title \"#{meta[:title]}\" --authors \"#{meta[:authors]}\" --cover \"#{t.source.gsub(/^html/, 'covers').gsub(/html$/, 'jpg')}\""
 end
 
 rule('.fb2' =>  [
@@ -144,5 +144,5 @@ rule('.fb2' =>  [
                 end
                 ]) do |t|
   meta = metadata(t.source.gsub(/^html/, 'mkd').gsub(/html$/, 'mkd'))
-  command "ebook-convert \"#{t.source}\" \"#{t.name}\" --chapter '/' --max-toc-links 0 --level1-toc '//h2' --level2-toc '//h3' --title \"#{meta[:title]}\" --authors \"#{meta[:authors]}\""
+  command "ebook-convert \"#{t.source}\" \"#{t.name}\" --chapter '/' --max-toc-links 0 --level1-toc '//h2' --level2-toc '//h3' --title \"#{meta[:title]}\" --authors \"#{meta[:authors]}\" --cover \"#{t.source.gsub(/^html/, 'covers').gsub(/html$/, 'jpg')}\""
 end

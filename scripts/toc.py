@@ -9,7 +9,7 @@ class Toc:
     # defaults
     self.infile = sys.stdin
     self.outfile = sys.stdout
-    self.tag_names = ['h2', 'h3', 'h4']
+    self.tag_names = ['h2', 'h3']
     self.toc_id = 'auto_toc'
     self.name_prefix = 'section'
     self.title = title
@@ -120,7 +120,8 @@ class Toc:
     self.soup.insert(0, toc)
 
   def output(self):
-    prefix = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    prefix = """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<title>%(title)s</title>

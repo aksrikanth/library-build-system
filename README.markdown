@@ -63,4 +63,22 @@ For example to build kindle compatible '.mobi' files do
     # Run this on the command line
     $ rake mobi
 
-{ :authors: "Srikanth Agaram", :title: "E-Book Library Build System" }
+{ "author-sort": "Srikanth Agaram", "authors": "Srikanth Agaram", "book-producer": "Srikanth Agaram", "comments": "Manual for the e-book build system used ot generate this ebook", "isbn": "unknown", "pubdate": "draft", "title": "E-Book Library Build System" }
+#    --publisher
+#    Set the ebook publisher.
+#    --rating
+#    Set the rating. Should be a number between 1 and 5.
+#    --series
+#    Set the series this ebook belongs to.
+#    --series-index
+#    Set the index of the book in this series.
+#    --tags
+#    Set the tags for the book. Should be a comma separated list.
+#    --title
+#    Set the title.
+#    --title-sort
+#    The version of the title to be used for sorting.
+#    --no-svg-cover
+#    Do not use SVG for the book cover. Use this option if your EPUB is going to be used on a device that does not support SVG, like the iPhone or the JetBook Lite. Without this option, such devices will display the cover as a blank page.
+#    --preserve-cover-aspect-ratio
+#    When using an SVG cover, this option will cause the cover to scale to cover the available screen area, but still preserve its aspect ratio (ratio of width to height). That means there may be white borders at the sides or top and bottom of the image, but the image will never be distorted. Without this option the image may be slightly distorted, but there will be no borders.

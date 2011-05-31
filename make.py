@@ -121,6 +121,7 @@ def build_commands(formats, target_formats, defaults, logfilename):
       source = get_filename_from_basename(target_basename, source_format, formats)
       target = get_filename_from_basename(target_basename, target_format, formats)
       metadata = get_metadata(target_basename, formats)
+      metadata['cover'] = get_filename_from_basename(target_basename, 'cover', formats)
       command = format_data['generator'](source, target, metadata, defaults)
       execute_command(command, logfile, False)
   logfile.close()

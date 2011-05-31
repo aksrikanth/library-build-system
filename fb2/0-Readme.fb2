@@ -1,67 +1,46 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<FictionBook xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.gribuser.ru/xml/fictionbook/2.0">
-<description>
-<title-info>
- <author>
-<first-name>Srikanth</first-name>
-<middle-name/>
-<last-name>Agaram</last-name>
-</author>
-<book-title>E-Book Library Build System</book-title> </title-info><document-info> <program-used>calibre - 0.7.10</program-used></document-info>
-</description>
-<body>
-<section><a id="calibre_link-0"/><p>
-    </p><a id="calibre_link-1"/><p>
+<?xml version="1.0" encoding="UTF-8"?><FictionBook xmlns="http://www.gribuser.ru/xml/fictionbook/2.0" xmlns:xlink="http://www.w3.org/1999/xlink"><description><title-info><genre>antique</genre><author><first-name>Srikanth</first-name><last-name>Agaram</last-name></author><book-title>E-Book Library Build System</book-title><lang>english</lang></title-info><document-info><author><first-name>Srikanth</first-name><last-name>Agaram</last-name></author><program-used>calibre 0.8.0</program-used><date>25.5.2011</date><id>89fd9a86-bbe2-47ae-abd9-cc3b4d76585d</id><version>1.0</version></document-info></description><body>
+<section>
+<p>
  <strong>
   Contents
- </strong>
- 
-  </p><p>
-   <a xlink:href="#calibre_link-2">
-    PART I
-   </a>
+ </strong></p>
+
+<p>
    
-    </p><p>
-     <a xlink:href="#calibre_link-3">
-      Introduction
-     </a>
-    
-    </p><p>
-     <a xlink:href="#calibre_link-4">
-      Requirements
-     </a>
-    
+    PART I</p>
+
+<p>
+     
+      Introduction</p>
+
+<p>
+     
+      Requirements</p>
+
+<p>
    
-  
-  </p><p>
-   <a xlink:href="#calibre_link-5">
-    PART II
-   </a>
-   
-    </p><p>
-     <a xlink:href="#calibre_link-6">
-      Books
-     </a>
-    
-    </p><p>
-     <a xlink:href="#calibre_link-7">
-      Usage
-     </a>
-    
-   
-  
- 
-</p><p>
-</p><strong><p>
- E-Book Library Build System
-</p></strong><p>
-</p><a id="calibre_link-2"/><strong><p>
+    PART II</p>
+
+<p>
+     
+      Books</p>
+
+<p>
+     
+      Usage</p>
+
+<p>
+ E-Book Library Build System</p>
+
+<p><strong>
  PART I
-</p></strong><p>
-</p><a id="calibre_link-3"/><strong><p>
+</strong></p>
+
+<p><strong>
  Introduction
-</p></strong><p>
-</p><p>
+</strong></p>
+
+<p>
  This system is designed to store e-books in
  <strong>
   plain text format
@@ -70,102 +49,61 @@
 generate readable html, pdf and other formats from it automatically. In
 order to accomplish this, the text files need to be formatted appropriately.
 The aim of this system is to ensure that the text is readable by itself and
-that other formats build on the text document and add appropriate features.
-</p><p>
-</p><p>
- Since the books are stored in plain text, this is suitable only for
- <emphasis>
-  ASCII
-prose
- </emphasis>
- . There is no provision for anything more than the most
+that other formats build on the text document and add appropriate features.</p>
+
+<p>
+ Since the books are stored in UTF-8 encoded text, this is suitable only for
+straight text. There is no provision for anything more than the most
  <emphasis>
   simple
  </emphasis>
  formatting. It is possible, therefore that some books might require
-preprocessing and might lose some formatting.
-</p><p>
-</p><a id="calibre_link-4"/><strong><p>
+preprocessing and might lose some formatting.</p>
+
+<p><strong>
  Requirements
-</p></strong><p>
-</p><p>
+</strong></p>
+
+<p>
  The following programs and libraries must be installed for proper
-functioning of this system:
-</p><p>
-</p><p>
- </p><p>
-  python
- </p><p>
- </p><p>
-  ruby
- </p><p>
- </p><p>
-  rubygems
- </p><p>
- </p><p>
-  rake gem
- </p><p>
- </p><p>
-  html2ps (needed for pdf)
- </p><p>
- </p><p>
-  ps2pdf (needed for pdf. may be packaged with the ghostscript package)
- </p><p>
- </p><p>
-  plucker (needed for plucker)
- </p><p>
- </p><p>
-  calibre (needed for mobibook and ePub)
- </p><p>
-</p><p>
-</p><p>
- On Ubuntu these may be installed by running
-</p><p>
-</p><p>
- </p><p>
+functioning of this system:</p>
+
+<p>
+  python</p>
+
+<p>
+  calibre (needed for mobibook and ePub)</p>
+
+<p>
+ On Ubuntu these may be installed by running</p>
+
+<p>
   # Run this on the command line
-$ sudo apt-get install python ruby html2ps ghostscript plucker calibre
- </p><p>
-</p><p>
-</p><p>
- I recommend installing the latest version of rubygems from it's source by
-following the instructions
- <a xlink:href="http://rubygems.org/read/chapter/3">
-  here
- </a>
- .
-</p><p>
-</p><p>
- Then the gems can be installed by running
-</p><p>
-</p><p>
- </p><p>
-  # Run this on the command line
-$ sudo gem install rake
- </p><p>
-</p><p>
-</p><a id="calibre_link-5"/><strong><p>
+$ sudo apt-get install python calibre</p>
+
+<p><strong>
  PART II
-</p></strong><p>
-</p><a id="calibre_link-6"/><strong><p>
+</strong></p>
+
+<p><strong>
  Books
-</p></strong><p>
-</p><p>
- All books to be built must be in plain text format and placed in the
+</strong></p>
+
+<p>
+ All books to be built must be in UTF-8 encoded text and placed in the
  
   mkd/
  
- folder. The books may be formatted in
- <a xlink:href="http://daringfireball.net/projects/markdown/">
+ folder. The books should be formatted in
+ 
   markdown
- </a>
+ 
  .
 See
- <a xlink:href="http://daringfireball.net/projects/markdown/syntax">
+ 
   their syntax page
- </a>
- to see how to format
-your books. You can also follow the example
+ 
+ to see how to format your books. You can also follow the example
  
   0-Readme.mkd
  
@@ -173,35 +111,121 @@ your books. You can also follow the example
  
   mkd
  
- folder.
-</p><p>
-</p><a id="calibre_link-7"/><strong><p>
- Usage
-</p></strong><p>
-</p><p>
- Use the following
- 
-  rake
- 
- command to see what formats can be built.
-</p><p>
-</p><p>
- </p><p>
-  # Run this on the command line
-$ rake -T
- </p><p>
-</p><p>
-</p><p>
- For example to build kindle compatible '.mobi' files do
-</p><p>
-</p><p>
- </p><p>
-  # Run this on the command line
-$ rake mobi
- </p><p>
-</p><p>
+ folder.</p>
 
-    </p><p>
-    </p>
+<p>
+ Each book must contain on it’s last line some metadata about the book in JSON
+format. The minimum metadata required is
+ 
+  title
+ 
+ and
+ 
+  author
+ 
+ . In order to
+prevent the metadata from appearing in the ebooks, it should be placed in an
+html comment.</p>
+
+<p>
+ The possible metadata tags are:</p>
+
+<p>
+  
+   author-sort
+  
+  :: String to be used when sorting by author.</p>
+
+<p>
+  
+   authors
+  
+  :: Ampersand separated list of authors.</p>
+
+<p>
+  
+   comments
+  
+  :: Comments about the books contents.</p>
+
+<p>
+  
+   isbn
+  
+  :: ISBN of the published book.</p>
+
+<p>
+  
+   pubdate
+  
+  :: Date of original publication.</p>
+
+<p>
+  
+   publisher
+  
+  :: Publisher of the book.</p>
+
+<p>
+  
+   rating
+  
+  :: Critical rating of the book (between 1 and 5).</p>
+
+<p>
+  
+   series
+  
+  :: The name of the series to which the book belongs.</p>
+
+<p>
+  
+   series-index
+  
+  :: The position of the book in the series.</p>
+
+<p>
+  
+   tags
+  
+  :: Tags that describe the book (possibly for searching in the future).</p>
+
+<p>
+  
+   title
+  
+  :: The title of the book.</p>
+
+<p>
+  
+   title-sort
+  
+  :: The title of the book to be used for sorting.</p>
+
+<p>
+ For example, the last line of “The Adventures of Sherlock Holmes” would look
+like:</p>
+
+<p>
+  &lt;!--{ "author-sort": "Arthur Conan Doyle", "authors": "Sir Arthur Conan +
+Doyle", "isbn": "987-0140621006", "pubdate": "1994-07-28", "publisher": +
+"Penguin Popular Classics", "series": "Sherlock Holmes Short Stories",  +
+"series-index": "1", "title": "The Adventures of Sherlock Holmes" }--&gt;</p>
+
+<p><strong>
+ Usage
+</strong></p>
+
+<p>
+ Run the python script
+ 
+  make.py
+ 
+ to generate all the formats from the markdown source.</p>
+
+<p>
+  # Run this on the command line
+$ python make.py</p><empty-line />
 </section>
+
 </body></FictionBook>

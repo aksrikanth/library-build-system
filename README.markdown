@@ -10,8 +10,8 @@ order to accomplish this, the text files need to be formatted appropriately.
 The aim of this system is to ensure that the text is readable by itself and
 that other formats build on the text document and add appropriate features.
 
-Since the books are stored in plain text, this is suitable only for _ASCII
-prose_. There is no provision for anything more than the most *simple*
+Since the books are stored in UTF-8 encoded text, this is suitable only for
+straight text. There is no provision for anything more than the most *simple*
 formatting. It is possible, therefore that some books might require
 preprocessing and might lose some formatting.
 
@@ -21,62 +21,57 @@ The following programs and libraries must be installed for proper
 functioning of this system:
 
  1. python
- 2. ruby
- 3. rubygems
- 4. rake gem
- 5. html2ps (needed for pdf)
- 6. ps2pdf (needed for pdf. may be packaged with the ghostscript package)
- 7. plucker (needed for plucker)
- 8. calibre (needed for mobibook and ePub)
+ 2. calibre (needed for mobibook and ePub)
 
 On Ubuntu these may be installed by running
 
     # Run this on the command line
-    $ sudo apt-get install python ruby html2ps ghostscript plucker calibre
-
-I recommend installing the latest version of rubygems from it's source by
-following the instructions [here](http://rubygems.org/read/chapter/3).
-
-Then the gems can be installed by running
-
-    # Run this on the command line
-    $ sudo gem install rake
+    $ sudo apt-get install python calibre
 
 ## PART II ##
 
 ### Books ###
 
-All books to be built must be in plain text format and placed in the `mkd/`
-folder. The books may be formatted in [markdown](http://daringfireball.net/projects/markdown/).
-See [their syntax page](http://daringfireball.net/projects/markdown/syntax) to see how to format
-your books. You can also follow the example `0-Readme.mkd` in the `mkd` folder.
+All books to be built must be in UTF-8 encoded text and placed in the `mkd/`
+folder. The books should be formatted in
+[markdown](http://daringfireball.net/projects/markdown/).
+See [their syntax page](http://daringfireball.net/projects/markdown/syntax)
+to see how to format your books. You can also follow the example `0-Readme.mkd`
+in the `mkd` folder.
+
+Each book must contain on it's last line some metadata about the book in JSON
+format. The minimum metadata required is `title` and `author`. In order to
+prevent the metadata from appearing in the ebooks, it should be placed in an
+html comment.
+
+The possible metadata tags are:
+
+ * `author-sort` :: String to be used when sorting by author.
+ * `authors` :: Ampersand separated list of authors.
+ * `comments` :: Comments about the books contents.
+ * `isbn` :: ISBN of the published book.
+ * `pubdate` :: Date of original publication.
+ * `publisher` :: Publisher of the book.
+ * `rating` :: Critical rating of the book (between 1 and 5).
+ * `series` :: The name of the series to which the book belongs.
+ * `series-index` :: The position of the book in the series.
+ * `tags` :: Tags that describe the book (possibly for searching in the future).
+ * `title` :: The title of the book.
+ * `title-sort` :: The title of the book to be used for sorting.
+
+For example, the last line of "The Adventures of Sherlock Holmes" would look
+like:
+
+    <!--{ "author-sort": "Arthur Conan Doyle", "authors": "Sir Arthur Conan +
+    Doyle", "isbn": "987-0140621006", "pubdate": "1994-07-28", "publisher": +
+    "Penguin Popular Classics", "series": "Sherlock Holmes Short Stories",  +
+    "series-index": "1", "title": "The Adventures of Sherlock Holmes" }-->
 
 ### Usage ###
 
-Use the following `rake` command to see what formats can be built.
+Run the python script `make.py` to generate all the formats from the markdown source.
 
     # Run this on the command line
-    $ rake -T
+    $ python make.py
 
-For example to build kindle compatible '.mobi' files do
-
-    # Run this on the command line
-    $ rake mobi
-
-<!--
-#    --publisher
-#    Set the ebook publisher.
-#    --rating
-#    Set the rating. Should be a number between 1 and 5.
-#    --series
-#    Set the series this ebook belongs to.
-#    --series-index
-#    Set the index of the book in this series.
-#    --tags
-#    Set the tags for the book. Should be a comma separated list.
-#    --title
-#    Set the title.
-#    --title-sort
-#    The version of the title to be used for sorting.
--->
-{ "author-sort": "Srikanth Agaram", "authors": "Srikanth Agaram", "book-producer": "Srikanth Agaram", "comments": "Manual for the e-book build system used ot generate this ebook", "isbn": "unknown", "pubdate": "draft", "title": "E-Book Library Build System" }
+<!--{ "authors": "Srikanth Agaram", "comments": "Manual for the e-book build system used to generate this ebook.", "title": "E-Book Library Build System" }-->

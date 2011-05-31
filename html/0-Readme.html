@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -66,12 +67,8 @@ The aim of this system is to ensure that the text is readable by itself and
 that other formats build on the text document and add appropriate features.
 </p>
 <p>
- Since the books are stored in plain text, this is suitable only for
- <em>
-  ASCII
-prose
- </em>
- . There is no provision for anything more than the most
+ Since the books are stored in UTF-8 encoded text, this is suitable only for
+straight text. There is no provision for anything more than the most
  <em>
   simple
  </em>
@@ -90,24 +87,6 @@ functioning of this system:
   python
  </li>
  <li>
-  ruby
- </li>
- <li>
-  rubygems
- </li>
- <li>
-  rake gem
- </li>
- <li>
-  html2ps (needed for pdf)
- </li>
- <li>
-  ps2pdf (needed for pdf. may be packaged with the ghostscript package)
- </li>
- <li>
-  plucker (needed for plucker)
- </li>
- <li>
   calibre (needed for mobibook and ePub)
  </li>
 </ol>
@@ -117,24 +96,7 @@ functioning of this system:
 <pre>
  <code>
   # Run this on the command line
-$ sudo apt-get install python ruby html2ps ghostscript plucker calibre
- </code>
-</pre>
-<p>
- I recommend installing the latest version of rubygems from it's source by
-following the instructions
- <a href="http://rubygems.org/read/chapter/3">
-  here
- </a>
- .
-</p>
-<p>
- Then the gems can be installed by running
-</p>
-<pre>
- <code>
-  # Run this on the command line
-$ sudo gem install rake
+$ sudo apt-get install python calibre
  </code>
 </pre>
 <h2 id="section_2">
@@ -144,11 +106,11 @@ $ sudo gem install rake
  Books
 </h3>
 <p>
- All books to be built must be in plain text format and placed in the
+ All books to be built must be in UTF-8 encoded text and placed in the
  <code>
   mkd/
  </code>
- folder. The books may be formatted in
+ folder. The books should be formatted in
  <a href="http://daringfireball.net/projects/markdown/">
   markdown
  </a>
@@ -157,8 +119,7 @@ See
  <a href="http://daringfireball.net/projects/markdown/syntax">
   their syntax page
  </a>
- to see how to format
-your books. You can also follow the example
+ to see how to format your books. You can also follow the example
  <code>
   0-Readme.mkd
  </code>
@@ -168,31 +129,126 @@ your books. You can also follow the example
  </code>
  folder.
 </p>
+<p>
+ Each book must contain on it&#8217;s last line some metadata about the book in JSON
+format. The minimum metadata required is
+ <code>
+  title
+ </code>
+ and
+ <code>
+  author
+ </code>
+ . In order to
+prevent the metadata from appearing in the ebooks, it should be placed in an
+html comment.
+</p>
+<p>
+ The possible metadata tags are:
+</p>
+<ul>
+ <li>
+  <code>
+   author-sort
+  </code>
+  :: String to be used when sorting by author.
+ </li>
+ <li>
+  <code>
+   authors
+  </code>
+  :: Ampersand separated list of authors.
+ </li>
+ <li>
+  <code>
+   comments
+  </code>
+  :: Comments about the books contents.
+ </li>
+ <li>
+  <code>
+   isbn
+  </code>
+  :: ISBN of the published book.
+ </li>
+ <li>
+  <code>
+   pubdate
+  </code>
+  :: Date of original publication.
+ </li>
+ <li>
+  <code>
+   publisher
+  </code>
+  :: Publisher of the book.
+ </li>
+ <li>
+  <code>
+   rating
+  </code>
+  :: Critical rating of the book (between 1 and 5).
+ </li>
+ <li>
+  <code>
+   series
+  </code>
+  :: The name of the series to which the book belongs.
+ </li>
+ <li>
+  <code>
+   series-index
+  </code>
+  :: The position of the book in the series.
+ </li>
+ <li>
+  <code>
+   tags
+  </code>
+  :: Tags that describe the book (possibly for searching in the future).
+ </li>
+ <li>
+  <code>
+   title
+  </code>
+  :: The title of the book.
+ </li>
+ <li>
+  <code>
+   title-sort
+  </code>
+  :: The title of the book to be used for sorting.
+ </li>
+</ul>
+<p>
+ For example, the last line of &#8220;The Adventures of Sherlock Holmes&#8221; would look
+like:
+</p>
+<pre>
+ <code>
+  &lt;!--{ "author-sort": "Arthur Conan Doyle", "authors": "Sir Arthur Conan +
+Doyle", "isbn": "987-0140621006", "pubdate": "1994-07-28", "publisher": +
+"Penguin Popular Classics", "series": "Sherlock Holmes Short Stories",  +
+"series-index": "1", "title": "The Adventures of Sherlock Holmes" }--&gt;
+ </code>
+</pre>
 <h3 id="section_2_2">
  Usage
 </h3>
 <p>
- Use the following
+ Run the python script
  <code>
-  rake
+  make.py
  </code>
- command to see what formats can be built.
+ to generate all the formats from the markdown source.
 </p>
 <pre>
  <code>
   # Run this on the command line
-$ rake -T
+$ python make.py
  </code>
 </pre>
-<p>
- For example to build kindle compatible '.mobi' files do
-</p>
-<pre>
- <code>
-  # Run this on the command line
-$ rake mobi
- </code>
-</pre>
+<!--{ "authors": "Srikanth Agaram", "comments": "Manual for the e-book build system used to generate this ebook.", "title": "E-Book Library Build System" }-->
 
     </body>
     </html>

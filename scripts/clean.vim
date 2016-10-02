@@ -1,4 +1,5 @@
 " replace utf-8 characters with ascii substitutes
+%s/\%u00a0//g
 %s/’/'/ge
 %s/“/"/ge
 %s/”/"/ge

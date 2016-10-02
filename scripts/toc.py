@@ -28,8 +28,9 @@ class Toc:
 
     # process the html, create toc and print
     self.get_tags()
-    self.id_tags()
-    self.create_toc()
+    if self.tag_list:
+      self.id_tags()
+      self.create_toc()
     self.output()
 
     # clean up
@@ -48,12 +49,14 @@ class Toc:
     tag_names = []
     for tag_name in self.tag_names:
       tag_list = self.soup.findAll(tag_name)
-      if len(tag_list) != 0 and len(tag_names) < 2:
+      if tag_list:
         tag_names.append(tag_name)
+      if len(tag_names) >= 2:
+        break
     self.tag_names = tag_names
 
     # get tags
-    self.tag_list = self.soup.findAll(self.tag_names)
+    self.tag_list = self.soup.findAll(self.tag_names) if self.tag_names else []
 
   def id_tags(self):
     counts = []
@@ -62,6 +65,7 @@ class Toc:
       counts.append(0)
     for tag in self.tag_list:
       reset = False
+      depth = 0
       for index, tag_name in enumerate(self.tag_names):
         if reset == True:
           counts[index] = 0
